@@ -44,7 +44,7 @@ public class Rental {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "rental")
+    @OneToMany(mappedBy = "rental")//
     private List<OrderedAdditionalService> orderedAdditionalServices;
 
 

@@ -40,9 +40,9 @@ public class RentalManager implements RentalService {
         this.orderedAdditionalServiceService = orderedAdditionalServiceService;
     }
 
-    @Override
+    @Override//kiralama bilgisi
     public Result add(CreateRentalRequest createRentalRequest) {
-        int carId = createRentalRequest.getCarId();
+        int carId = createRentalRequest.getCarId();//int değer döndürüyor.
         checkIfRentalExists(carId);
         Rental result = this.modelMapperService.forRequest().map(createRentalRequest, Rental.class);
         this.rentalDao.save(result);

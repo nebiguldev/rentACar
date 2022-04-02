@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "additional_services")
+@Table(name = "additional_services")//tablo ismi çoğul olur
 public class AdditionalService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -35,7 +35,7 @@ public class Car {
     private Color color;
 
     @ManyToOne
-    @JoinColumn(name = "brand_id")
+    @JoinColumn(name = "brand_id")//bir markanın birden fazla arabası olabilir.
     private Brand brand;
 
     @OneToMany(mappedBy = "car")

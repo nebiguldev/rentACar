@@ -1,5 +1,5 @@
 package com.etiya.rentACar.core.utilities.results;
-
+//date ile gönderdiğim result
 public class DataResult<T> extends Result{
     private T data;
 

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateColorRequest {
-    @JsonIgnore
+    @JsonIgnore//request ve response de id 'yi göstermek istemiyorum.
     private int id;
 
     private String name;

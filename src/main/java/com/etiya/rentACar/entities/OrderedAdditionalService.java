@@ -19,10 +19,10 @@ public class OrderedAdditionalService {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "rental_id")
+    @JoinColumn(name = "rental_id")//araba kiralarken bir çok sipariş verilebilir.
     private Rental rental;
 
     @ManyToOne
-    @JoinColumn(name = "additional_service_id")
+    @JoinColumn(name = "additional_service_id")//bir siparişte birden fazla hizmet alınabilir.
     private AdditionalService additionalService;
 }

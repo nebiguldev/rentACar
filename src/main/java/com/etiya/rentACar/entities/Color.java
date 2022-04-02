@@ -23,7 +23,7 @@ public class Color {
     @Column(name="name")
     private String name;
 
-    @OneToMany(mappedBy = "color")
+    @OneToMany(mappedBy = "color")//bir renkten birden fazla araba olabilir .
     private List<Car> cars;
 
 

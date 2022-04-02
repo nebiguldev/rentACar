@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface BrandDao extends JpaRepository<Brand, Integer> {
-    Boolean existsBrandByNameIgnoreCase(String name);
+    Boolean existsBrandByNameIgnoreCase(String name);//türkçe karkterler hariç büyük küçük harf duyarlı hale getiriyor.
 }
