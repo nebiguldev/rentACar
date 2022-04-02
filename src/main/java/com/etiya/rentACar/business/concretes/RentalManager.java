@@ -20,7 +20,6 @@ import com.etiya.rentACar.core.utilities.results.SuccessDataResult;
 import com.etiya.rentACar.core.utilities.results.SuccessResult;
 import com.etiya.rentACar.dataAccess.abstracts.RentalDao;
 import com.etiya.rentACar.entities.CarStates;
-import com.etiya.rentACar.entities.OrderedAdditionalService;
 import com.etiya.rentACar.entities.Rental;
 import org.springframework.stereotype.Service;
 
@@ -115,11 +114,11 @@ public class RentalManager implements RentalService {
 
     }
 
-    private void checkIfRentalIdExists(int rentalId) {
-        if (!this.rentalDao.existsById(rentalId)) {
-            throw new BusinessException("Böyle bir id ye ait kayıt yoktur");
-        }
-    }
+//    private void checkIfRentalIdExists(int rentalId) {
+//        if (!this.rentalDao.existsById(rentalId)) {
+//            throw new BusinessException("Böyle bir id ye ait kayıt yoktur");
+//        }
+//    }
 
 }
 

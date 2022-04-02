@@ -32,7 +32,7 @@ public class BrandsController {
        return this.brandService.update(updateBrandRequest);
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public Result delete(@RequestBody DeleteBrandRequest deleteBrandRequest) {
         return this.brandService.delete(deleteBrandRequest);
     }

@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data//Getter ve Setter oluşturur.
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor//parametreli constructor
+@NoArgsConstructor//parametresiz constructor Spring boot tarafından
 public class BrandDto {
     private int id;
     private String name;

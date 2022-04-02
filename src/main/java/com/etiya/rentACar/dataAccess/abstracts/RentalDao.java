@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-public interface RentalDao extends JpaRepository<Rental, Integer> {
+@Repository//JpaRepository oluğunu belirtiyoruz .
+public interface RentalDao extends JpaRepository<Rental, Integer> {//generic kısımda id nin int olduğunu belirtiyoruz.Jpadaki generic yapı bu şekilde.
     Boolean existsById(int rentalId);
     List<Rental> getByCarId(int CarId);
 }

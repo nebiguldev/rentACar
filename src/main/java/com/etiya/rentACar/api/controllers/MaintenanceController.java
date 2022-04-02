@@ -35,7 +35,7 @@ public class MaintenanceController {
       return   this.maintenanceService.update(updateMaintenanceRequest);
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public Result delete(@RequestBody DeleteMaintenanceRequest deleteMaintenanceRequest) {
       return   this.maintenanceService.delete(deleteMaintenanceRequest);
     }

@@ -1,5 +1,10 @@
 package com.etiya.rentACar.business.concretes;
-
+/*Business: Bu katman ise işlerin yapıldığı katmandır.
+Belirlenen algoritmalara göre verilerin şekillenmesini sağlayan
+logic dediğimiz işlemlerin yapıldığı katmandır. Örnek olarak veri
+ tabanından belirli bir kurala göre verileri çekmek istiyorsak
+o kuralı bu iş katmanında belirlediğimiz metot içerisinde uygulayarak
+istediğimiz veriyi elde etmiş oluruz.*/
 import com.etiya.rentACar.business.abstracts.BrandService;
 import com.etiya.rentACar.business.constants.messages.BusinessMessages;
 import com.etiya.rentACar.business.requests.brandRequests.CreateBrandRequest;

@@ -27,7 +27,7 @@ public class CustomersController {
         return this.customerService.update(updateCustomerRequest);
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public Result delete(@RequestBody DeleteCustomerRequest deleteCustomerRequest) {
         return this.customerService.delete(deleteCustomerRequest);
     }

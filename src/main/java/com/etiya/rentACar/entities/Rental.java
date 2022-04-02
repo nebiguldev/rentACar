@@ -11,8 +11,8 @@ import java.util.List;
 @Data//Getter ve Setter oluşturur.
 @AllArgsConstructor//parametreli constructor
 @NoArgsConstructor//parametresiz constructor
-@Entity
-@Table(name = "rentals")
+@Entity//Sen bir entitiysin
+@Table(name = "rentals")//tablo ismi
 public class Rental {
 
     @Id

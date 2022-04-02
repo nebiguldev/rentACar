@@ -25,23 +25,25 @@ import java.util.stream.Collectors;
 
 @Service
 public class CarManager implements CarService {
-    private CarDao carDao;
-    private ModelMapperService modelMapperService;
+    private CarDao carDao;//veritabanındaki işleri yaptırdığımız için ce dao bizim db imiz olduğundan dao yu çağırıyoruz
+    private ModelMapperService modelMapperService;//mapleme yapmak için mapper service i çağırıyoruz
 
-    public CarManager(CarDao carDao, ModelMapperService modelMapperService) {
+    public CarManager(CarDao carDao, ModelMapperService modelMapperService) {//constructorlarını oluşturduk
         this.carDao = carDao;
         this.modelMapperService = modelMapperService;
     }
 
     @Override
+    //ekleme operasyonu
     public Result add(CreateCarRequest createCarRequest) {
         Car car = this.modelMapperService.forRequest().map(createCarRequest, Car.class);
-        this.carDao.save(car);
-        return new SuccessResult("CAR_ADDED");
+        this.carDao.save(car);//saveliyor
+        return new SuccessResult("CAR_ADDED");//araç eklendi diye business exception fırlatıyor.
 
     }
 
     @Override
+    //güncelleme
     public Result update(UpdateCarRequest updateCarRequest) {
 
         Car result = this.modelMapperService.forRequest().map(updateCarRequest, Car.class);
@@ -58,6 +60,7 @@ public class CarManager implements CarService {
     }
 
     @Override
+    //aracın durumunu güncelliyor.
     public Result updateCarState(UpdateCarStateRequest updateCarStateRequest) {
         Car result = this.carDao.getById(updateCarStateRequest.getCarId());
         result.setCarState(updateCarStateRequest.getCarStateName());
@@ -86,6 +89,7 @@ public class CarManager implements CarService {
     }
 
     @Override
+    //mapleme işlemi
     public DataResult<List<ListCarDto>> getAllByModelYear(double modelYear) {
         List<Car> cars = this.carDao.getByModelYear(modelYear);
         List<ListCarDto> response = cars.stream().map(car -> this.modelMapperService.forDto()

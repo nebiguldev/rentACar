@@ -31,7 +31,7 @@ public class CitiesController {
         return this.cityService.update(updateCityRequest);
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public Result delete(@RequestBody DeleteCityRequest deleteCityRequest) {
         return this.cityService.delete(deleteCityRequest);
     }

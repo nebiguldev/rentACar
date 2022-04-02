@@ -2,6 +2,8 @@ package com.etiya.rentACar.business.concretes;
 
 import com.etiya.rentACar.business.abstracts.AdditionalServiceService;
 import com.etiya.rentACar.business.requests.additionalServiceRequests.CreateAdditionalServiceRequest;
+import com.etiya.rentACar.business.requests.additionalServiceRequests.DeleteAdditionalServiceRequest;
+import com.etiya.rentACar.business.requests.additionalServiceRequests.UpdateAdditionalServiceRequest;
 import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
 import com.etiya.rentACar.core.utilities.results.Result;
 import com.etiya.rentACar.core.utilities.results.SuccessResult;
@@ -27,5 +29,15 @@ public class AdditionalServiceManager implements AdditionalServiceService {
         this.additionalServiceDao.save(result);
 
         return new SuccessResult();
+    }
+
+    @Override
+    public Result update(UpdateAdditionalServiceRequest updateAdditionalServiceRequest) {
+        return null;
+    }
+
+    @Override
+    public Result delete(DeleteAdditionalServiceRequest deleteAdditionalServiceRequest) {
+        return null;
     }
 }
