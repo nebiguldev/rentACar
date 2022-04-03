@@ -10,6 +10,6 @@ import java.util.List;
 public interface MaintenanceDao extends JpaRepository<Maintenance,Integer> {
     Boolean existsMaintenanceByCarId(int MaintenanceCarId);
     List<Maintenance> getByCarId(int CarId);
-    Maintenance getById(int id);
+   // Maintenance getById(int id);
 
 }

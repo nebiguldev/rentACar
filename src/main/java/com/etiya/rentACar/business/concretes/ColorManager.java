@@ -1,10 +1,10 @@
 package com.etiya.rentACar.business.concretes;
 
 import com.etiya.rentACar.business.abstracts.ColorService;
+import com.etiya.rentACar.business.constants.messages.BusinessMessages;
 import com.etiya.rentACar.business.requests.colorRequests.CreateColorRequest;
 import com.etiya.rentACar.business.requests.colorRequests.DeleteColorRequest;
 import com.etiya.rentACar.business.requests.colorRequests.UpdateColorRequest;
-import com.etiya.rentACar.business.responses.carResponses.ListCarDto;
 import com.etiya.rentACar.business.responses.colorResponses.ListColorDto;
 import com.etiya.rentACar.core.crossCuttingConcerns.exceptionHandling.BusinessException;
 import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
@@ -25,6 +25,7 @@ public class ColorManager implements ColorService {
     private ColorDao colorDao;
     private ModelMapperService modelMapperService;
 
+
     public ColorManager(ColorDao colorDao, ModelMapperService modelMapperService) {
         this.colorDao = colorDao;
         this.modelMapperService = modelMapperService;
@@ -38,23 +39,10 @@ public class ColorManager implements ColorService {
 
         Color result = this.modelMapperService.forRequest().map(createColorRequest, Color.class);
         this.colorDao.save(result);
-        return new SuccessResult("COLOR_ADD");
+        return new SuccessResult(BusinessMessages.ColorMessages.COLOR_ADD);
 
     }
 
-    @Override
-    public Result update(UpdateColorRequest updateColorRequest) {
-        Color result = this.modelMapperService.forRequest().map(updateColorRequest,Color.class);
-        this.colorDao.save(result);
-        return new SuccessResult("COLOR_UPDATED");
-    }
-
-    @Override
-    public Result delete(DeleteColorRequest deleteColorRequest) {
-        int colorId = deleteColorRequest.getId();
-        this.colorDao.deleteById(colorId);
-        return new SuccessResult("COLOR_DELETED");
-    }
 
     @Override
     public DataResult<List<ListColorDto>> getAll() {
@@ -65,7 +53,7 @@ public class ColorManager implements ColorService {
 
     private void checkIfColorExists(String colorName){
         if (this.colorDao.existsColorByNameIgnoreCase(colorName)) {
-            throw new BusinessException("Bu Renk daha önce kullanılmış");
+            throw new BusinessException(BusinessMessages.ColorMessages.COLOR_IS_ALREADY_EXISTS);
         }
     }
 

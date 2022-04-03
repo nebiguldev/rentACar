@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor//parametreli
 @NoArgsConstructor//parametresz
 @Entity//sen bir entitysin
-@Table(name = "brands")//tablo ismi
+@Table(name = "brands")
 public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)//birer birer artan id

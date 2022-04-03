@@ -15,4 +15,5 @@ public class UpdateMaintenanceRequest {
     private LocalDate dateAdded;
     private LocalDate dateReturned;
     private int carId;
+    private String carDescription;
 }

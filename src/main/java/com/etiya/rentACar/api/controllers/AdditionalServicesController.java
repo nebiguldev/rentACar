@@ -4,9 +4,13 @@ import com.etiya.rentACar.business.abstracts.AdditionalServiceService;
 import com.etiya.rentACar.business.requests.additionalServiceRequests.CreateAdditionalServiceRequest;
 import com.etiya.rentACar.business.requests.additionalServiceRequests.DeleteAdditionalServiceRequest;
 import com.etiya.rentACar.business.requests.additionalServiceRequests.UpdateAdditionalServiceRequest;
-import com.etiya.rentACar.business.requests.brandRequests.UpdateBrandRequest;
+import com.etiya.rentACar.business.responses.additionalServiceResponses.ListAdditionalServiceDto;
+import com.etiya.rentACar.business.responses.customerResponses.ListCustomerDto;
+import com.etiya.rentACar.core.utilities.results.DataResult;
 import com.etiya.rentACar.core.utilities.results.Result;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController//İlgili sınıfın  Controller olma özelliği katar
 @RequestMapping("/api/additionalServices")//Hangi adreste yayınlanması gerektiğini
@@ -29,5 +33,10 @@ public class AdditionalServicesController {
     public Result delete(@RequestBody DeleteAdditionalServiceRequest deleteAdditionalServiceRequest){
         return this.additionalServiceService.delete(deleteAdditionalServiceRequest);
     }
+    @GetMapping("/getall")
+    public DataResult<List<ListAdditionalServiceDto>> getAll() {
+        return this.additionalServiceService.getAll();
+    }
+
 
 }

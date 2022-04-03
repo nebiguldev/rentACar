@@ -2,6 +2,7 @@ package com.etiya.rentACar.business.concretes;
 
 
 import com.etiya.rentACar.business.abstracts.CarService;
+import com.etiya.rentACar.business.constants.messages.BusinessMessages;
 import com.etiya.rentACar.business.requests.carRequests.CreateCarRequest;
 import com.etiya.rentACar.business.requests.carRequests.DeleteCarRequest;
 import com.etiya.rentACar.business.requests.carRequests.UpdateCarRequest;
@@ -38,7 +39,7 @@ public class CarManager implements CarService {
     public Result add(CreateCarRequest createCarRequest) {
         Car car = this.modelMapperService.forRequest().map(createCarRequest, Car.class);
         this.carDao.save(car);//saveliyor
-        return new SuccessResult("CAR_ADDED");//araç eklendi diye business exception fırlatıyor.
+        return new SuccessResult(BusinessMessages.Car.CAR_ADD);//araç eklendi diye business mesaj fırlatıyor.
 
     }
 
@@ -48,15 +49,15 @@ public class CarManager implements CarService {
 
         Car result = this.modelMapperService.forRequest().map(updateCarRequest, Car.class);
         this.carDao.save(result);
-        return new SuccessResult("CAR_UPDATED");
+        return new SuccessResult(BusinessMessages.Car.CAR_UPDATE);
     }
 
-
+//silme operasyonu
     @Override
     public Result delete(DeleteCarRequest deleteCarRequest) {
         int carId = deleteCarRequest.getId();
         this.carDao.deleteById(carId);
-        return new SuccessResult("CAR_DELETED");
+        return new SuccessResult(BusinessMessages.Car.CAR_REMOVE);
     }
 
     @Override
@@ -65,7 +66,7 @@ public class CarManager implements CarService {
         Car result = this.carDao.getById(updateCarStateRequest.getCarId());
         result.setCarState(updateCarStateRequest.getCarStateName());
         this.carDao.save(result);
-        return new SuccessResult("CAR_UPDATED");
+        return new SuccessResult(BusinessMessages.Car.CAR_UPDATE);
     }
 
 

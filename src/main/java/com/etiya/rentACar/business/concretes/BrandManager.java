@@ -42,7 +42,7 @@ public class BrandManager implements BrandService {
 
         Brand brand = this.modelMapperService.forRequest().map(createBrandRequest, Brand.class);
         this.brandDao.save(brand);
-        return new SuccessResult("BRAND_ADDED");
+        return new SuccessResult(BusinessMessages.BrandMessages.BRAND_ADD);
 
 
     }
@@ -52,14 +52,14 @@ public class BrandManager implements BrandService {
 
         Brand result = this.modelMapperService.forRequest().map(updateBrandRequest, Brand.class);
          this.brandDao.save(result);
-         return new SuccessResult("BRAND_UPDATED");
+         return new SuccessResult(BusinessMessages.BrandMessages.BRAND_UPDATE);
     }
 
     @Override
     public Result delete(DeleteBrandRequest deleteBrandRequest) {
         int brandId = deleteBrandRequest.getId();
         this.brandDao.deleteById(brandId);
-        return new SuccessResult("BRAND_DELETED");
+        return new SuccessResult(BusinessMessages.BrandMessages.BRAND_DELETE);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class BrandManager implements BrandService {
     private void checkIfBrandExists(String brandName) {
 
         if (this.brandDao.existsBrandByNameIgnoreCase(brandName)) {
-            throw new BusinessException("Bu marka daha önce kullanılmış");
+            throw new BusinessException(BusinessMessages.BrandMessages.BRAND_IS_ALREADY_EXISTS);
         }
 
     }

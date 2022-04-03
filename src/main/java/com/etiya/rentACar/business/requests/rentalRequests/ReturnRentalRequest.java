@@ -24,7 +24,11 @@ public class ReturnRentalRequest {
 
     private int returnCityId;
 
+    private  int additionalServiceId;
+
     private double dailyPrice;
+
+
 
 
 

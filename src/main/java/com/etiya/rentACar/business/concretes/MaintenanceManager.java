@@ -3,19 +3,19 @@ package com.etiya.rentACar.business.concretes;
 import com.etiya.rentACar.business.abstracts.CarService;
 import com.etiya.rentACar.business.abstracts.MaintenanceService;
 import com.etiya.rentACar.business.constants.messages.BusinessMessages;
-import com.etiya.rentACar.business.requests.carRequests.UpdateCarRequest;
 import com.etiya.rentACar.business.requests.carRequests.UpdateCarStateRequest;
 import com.etiya.rentACar.business.requests.maintenanceRequests.CreateMaintenanceRequest;
 import com.etiya.rentACar.business.requests.maintenanceRequests.DeleteMaintenanceRequest;
 import com.etiya.rentACar.business.requests.maintenanceRequests.UpdateMaintenanceRequest;
+import com.etiya.rentACar.core.utilities.results.DataResult;
+import com.etiya.rentACar.core.utilities.results.Result;
+import com.etiya.rentACar.core.utilities.results.SuccessDataResult;
+import com.etiya.rentACar.core.utilities.results.SuccessResult;
 import com.etiya.rentACar.business.responses.carResponses.CarDto;
-import com.etiya.rentACar.business.responses.damageResponses.ListDamageDto;
 import com.etiya.rentACar.business.responses.maintenanceResponses.ListMaintenanceDto;
 import com.etiya.rentACar.core.crossCuttingConcerns.exceptionHandling.BusinessException;
 import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
-import com.etiya.rentACar.core.utilities.results.*;
 import com.etiya.rentACar.dataAccess.abstracts.MaintenanceDao;
-import com.etiya.rentACar.entities.Car;
 import com.etiya.rentACar.entities.CarStates;
 import com.etiya.rentACar.entities.Maintenance;
 import org.springframework.stereotype.Service;
@@ -57,7 +57,7 @@ public class MaintenanceManager implements MaintenanceService {
     public Result delete(DeleteMaintenanceRequest deleteMaintenanceRequest) {
         int maintenanceId = deleteMaintenanceRequest.getId();
         this.maintenanceDao.deleteById(maintenanceId);
-        return new SuccessResult("MAINTENANCE_DELETED");
+        return new SuccessResult(BusinessMessages.MaintenanceMessages.CAR_UNDERMAINTENANCE);
     }
 
 
@@ -89,7 +89,7 @@ public class MaintenanceManager implements MaintenanceService {
 
     }
 
-    private void updateCarState(CreateMaintenanceRequest createMaintenanceRequest){
+    private void updateCarState(CreateMaintenanceRequest createMaintenanceRequest) {
         CarDto carDto = this.carService.getById(createMaintenanceRequest.getCarId());
         UpdateCarStateRequest updateCarStateRequest = this.modelMapperService.forRequest().map(carDto, UpdateCarStateRequest.class);
         updateCarStateRequest.setCarStateName(CarStates.UnderMaintenance);
@@ -97,7 +97,4 @@ public class MaintenanceManager implements MaintenanceService {
         this.carService.updateCarState(updateCarStateRequest);
 
     }
-// ayrı oluşturmam gerekiyor...
-    // dto düzelt ve ayrı update oluştur request oluştur.
-
 }

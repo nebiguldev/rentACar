@@ -19,10 +19,8 @@ public class CarDto {
 
     private double modelYear;
 
-    @JsonIgnore
     private  int brandId;
 
-    @JsonIgnore
     private  int colorId;
 
     private int cityId;
