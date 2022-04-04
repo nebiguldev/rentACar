@@ -1,5 +1,7 @@
 package com.etiya.rentACar.business.constants.messages;
 
+import java.net.PortUnreachableException;
+
 public class BusinessMessages {
 
     public static class MaintenanceMessages {
@@ -43,7 +45,14 @@ public class BusinessMessages {
         public static final String ADDITIONAL_SERVICES_ADD="Ek hizmet eklendi";
         public static final String ADDITIONAL_SERVICES_DELETED="Ek hizmet silindi";
         public static final String ADDITIONAL_SERVICES_UPDATED="Ek hizmetler güncellendi";
+
     }
+    public static class BillMessages{
+        public static final String BILL_ADDED="Fatura başarıyla eklendi";
+        public static final String BILL_DELETED="Fatura başarıyla silindi";
+        public static final String BILL_UPDATED="Fatura başarıyla güncellendi.";
+    }
+
 
 
 }

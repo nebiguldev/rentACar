@@ -1,6 +1,7 @@
 package com.etiya.rentACar.business.responses.rentalResponses;
 
-import com.etiya.rentACar.entities.AdditionalService;
+
+import com.etiya.rentACar.business.responses.orderedAdditionalServiceResponses.OrderedAdditionalServiceDto;
 import com.etiya.rentACar.entities.OrderedAdditionalService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,17 +20,23 @@ public class RentalDto {
 
     private LocalDate returnDate;
 
+    private String customerFirstName;
+
+    private String customerLastName;
+
     private int customerId;
-
-    private int carId;
-
-    private int rentCityId;
-
-    private int returnCityId;
 
     private double dailyPrice;
 
-    OrderedAdditionalService orderedAdditionalServicesId;
+    private String carDescription;
+
+    private int rentCityName;
+
+    private int returnCityName;
+
+
+
+    List<OrderedAdditionalServiceDto> orderedAdditionalServices;
 
 
 }

@@ -17,5 +17,6 @@ public class BillDto {
     private LocalDate returnDate;
     private double totalPrice;
     private int totalRentDay;
-    private String customerName;
+    private String customerFirstName;
+    private  String customerLastName;
 }

@@ -5,6 +5,7 @@ import com.etiya.rentACar.business.requests.rentalRequests.DeleteRentalRequest;
 import com.etiya.rentACar.business.requests.rentalRequests.ReturnRentalRequest;
 import com.etiya.rentACar.business.requests.rentalRequests.UpdateRentalRequest;
 import com.etiya.rentACar.business.responses.rentalResponses.ListRentalDto;
+import com.etiya.rentACar.business.responses.rentalResponses.RentalDto;
 import com.etiya.rentACar.core.utilities.results.DataResult;
 import com.etiya.rentACar.core.utilities.results.Result;
 
@@ -20,4 +21,6 @@ public interface RentalService {
     Result returnRental(ReturnRentalRequest returnRentalRequest);
 
     DataResult<List<ListRentalDto>> getAll();
+
+    RentalDto getById(int rentalId);
 }

@@ -7,6 +7,7 @@ import com.etiya.rentACar.business.responses.billResponses.ListBillDto;
 import com.etiya.rentACar.core.utilities.results.DataResult;
 import com.etiya.rentACar.core.utilities.results.Result;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface BillService {
@@ -17,4 +18,10 @@ public interface BillService {
     Result delete(DeleteBillRequest deleteBillRequest);
 
     DataResult<List<ListBillDto>> getAll();
+
+    DataResult<List<ListBillDto>> getByCustomerId(int customerId);
+
+    DataResult<List<ListBillDto>> findByCreateDateBetween(LocalDate startDate, LocalDate endDate);
+
+
 }

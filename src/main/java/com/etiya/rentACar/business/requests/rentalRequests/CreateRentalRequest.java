@@ -20,9 +20,7 @@ public class CreateRentalRequest {
     private LocalDate rentDate;
     @NotNull
     private LocalDate returnDate;
-
     private double dailyPrice;
-
     @NotNull
     private int customerId;
     @NotNull

@@ -19,19 +19,17 @@ public class CarDto {
 
     private double modelYear;
 
-    private  int brandId;
+    private  int brandName;
 
     private  int colorId;
 
-    private int cityId;
-
-    private String brandName;
+    private int cityName;
 
     private String colorName;
 
     private CarStates carStateName;
 
-    private  double kilometerInfo;
+
 
 
 }

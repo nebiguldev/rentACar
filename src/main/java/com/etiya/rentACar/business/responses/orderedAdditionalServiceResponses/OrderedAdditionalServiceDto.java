@@ -1,5 +1,6 @@
 package com.etiya.rentACar.business.responses.orderedAdditionalServiceResponses;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,8 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderedAdditionalServiceDto {
+
     private int id;
     private int rentalId;
+    private String additionalServiceId;
     private String additionalServiceName;
-    private double additionalServicePrice;
+    private int additionalServiceDailyPrice;
 }
+

@@ -15,9 +15,7 @@ public class CreateBillRequest {
     private int id;
     private String billNumber;
     private LocalDate createDate;
-    private LocalDate rentDate;
-    private LocalDate returnDate;
-    private int totalRentDay;
     private double totalPrice;
     private int customerId;
+    private int rentalId;
 }

@@ -3,10 +3,7 @@ package com.etiya.rentACar.business.concretes;
 
 import com.etiya.rentACar.business.abstracts.CarService;
 import com.etiya.rentACar.business.constants.messages.BusinessMessages;
-import com.etiya.rentACar.business.requests.carRequests.CreateCarRequest;
-import com.etiya.rentACar.business.requests.carRequests.DeleteCarRequest;
-import com.etiya.rentACar.business.requests.carRequests.UpdateCarRequest;
-import com.etiya.rentACar.business.requests.carRequests.UpdateCarStateRequest;
+import com.etiya.rentACar.business.requests.carRequests.*;
 import com.etiya.rentACar.business.responses.carResponses.CarDto;
 import com.etiya.rentACar.business.responses.carResponses.ListCarDto;
 import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
@@ -67,6 +64,26 @@ public class CarManager implements CarService {
         result.setCarState(updateCarStateRequest.getCarStateName());
         this.carDao.save(result);
         return new SuccessResult(BusinessMessages.Car.CAR_UPDATE);
+    }
+
+    @Override
+    public void updateCarKilometer(UpdateKilometerRequest updateKilometerRequest) {
+        int carId = updateKilometerRequest.getId();
+        Car car = this.carDao.getById(carId);
+        UpdateCarRequest updateCarRequest = this.modelMapperService.forRequest().map(car,UpdateCarRequest.class);
+        updateCarRequest.setKilometerInfo(updateKilometerRequest.getKilometerInfo());
+        Car result = this.modelMapperService.forRequest().map(updateCarRequest,Car.class);
+        this.carDao.save(result);
+    }
+
+    @Override
+    public void updateCarCity(UpdateCarCityRequest updateCarCityRequest) {
+        int carId = updateCarCityRequest.getId();
+        Car car = this.carDao.getById(carId);
+        UpdateCarRequest updateCarRequest = this.modelMapperService.forRequest().map(car,UpdateCarRequest.class);
+        updateCarRequest.setCityId(updateCarCityRequest.getCityId());
+        Car result = this.modelMapperService.forRequest().map(updateCarRequest,Car.class);
+        this.carDao.save(result);
     }
 
 

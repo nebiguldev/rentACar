@@ -26,7 +26,7 @@ public class ListCarDto {
 
     private CarStates carStateName;
 
-    private  double kilometerInfo;
+
 
 
 
