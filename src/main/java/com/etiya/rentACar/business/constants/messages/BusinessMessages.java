@@ -9,10 +9,11 @@ public class BusinessMessages {
     public static  class RentalMessages {
         public static final String CAR_RENTED = "Bu araç kirada";
         public static final String CAR_NOT_AVAILABLE = " Araç müsait değil";
-        public static final String RENTAL_NOT_ID = "Bu id ile bir kiralama gerçekleşmemiştir";
         public static final String RENTAL_DELETED = "Kiralama kaydı silinmiştir.";
         public static final String RENTAL_UPDATE = "Kiralama kaydı güncellenmiştir";
         public static final String RENTAL_ADD  ="Kiralama başarıyla eklenmiştir";
+        public static final String RENTAL_RETURNED = "Kiralanan araç başarıyla teslim alınmıştır!";
+        public static final String RENTAL_NOT_EXIST = "Böyle bir id ile daha önce bir  kiralanma işlemi yoktur. Dolayısıyla teslim alınma söz konusu olamaz!";
     }
 
     public static class CityMessages {

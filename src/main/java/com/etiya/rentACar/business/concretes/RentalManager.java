@@ -39,41 +39,34 @@ public class RentalManager implements RentalService {
         this.carService = carService;
         this.orderedAdditionalServiceService = orderedAdditionalServiceService;
     }
-
-    @Override//kiralama bilgisi
+   // kiralama ekleme
+    @Override
     public Result add(CreateRentalRequest createRentalRequest) {
-        int carId = createRentalRequest.getCarId();//int değer döndürüyor.
-        checkIfRentalExists(carId);
+        int carId = createRentalRequest.getCarId();
+        checkIfCarState(carId);//aşağıda yazdığımız methodu çağırıyoruz.//aracın durumu müsaitise kiralanabilir.
+
         Rental result = this.modelMapperService.forRequest().map(createRentalRequest, Rental.class);
         this.rentalDao.save(result);
-        // rented
-        UpdateCarStateRequest updateCarStateRequest = new UpdateCarStateRequest();
-        updateCarStateRequest.setCarId(carId);
-        updateCarStateRequest.setCarStateName(CarStates.Rented);
-        this.carService.updateCarState(updateCarStateRequest);
-        //state güncelleme
+
+
+        int rentCityId = createRentalRequest.getRentCityId();
+        CarStates states = CarStates.Rented;
+        updateCarState(carId, rentCityId, states);
 
         int rentalId = result.getId();
-        CreateOrderedAdditionalServiceRequest deneme = new CreateOrderedAdditionalServiceRequest();
-        deneme.setRentalId(rentalId);
-
-        for (int item : createRentalRequest.getAdditionalServiceId()) {
-
-            deneme.setAdditionalServiceId(item);
-            this.orderedAdditionalServiceService.add(deneme);
-        }
-
+        List<Integer> additionalServicesId = createRentalRequest.getAdditionalServiceId();
+        createOrderedAdditionalService(rentalId, additionalServicesId);
 
         return new SuccessResult(BusinessMessages.RentalMessages.RENTAL_ADD);
     }
-
+    //kiralama kaydı güncelleme
     @Override
     public Result update(UpdateRentalRequest updateRentalRequest) {
         Rental result = this.modelMapperService.forRequest().map(updateRentalRequest, Rental.class);
         this.rentalDao.save(result);
         return new SuccessResult(BusinessMessages.RentalMessages.RENTAL_UPDATE);
     }
-
+    //kiralama kaydı silme
     @Override
     public Result delete(DeleteRentalRequest deleteRentalRequest) {
         int rentalId = deleteRentalRequest.getId();
@@ -81,34 +74,57 @@ public class RentalManager implements RentalService {
         return new SuccessResult(BusinessMessages.RentalMessages.RENTAL_DELETED);
     }
 
+    //aracın teslimi .
     public Result returnRental(ReturnRentalRequest returnRentalRequest) {
 
-        Rental result = this.rentalDao.getById(returnRentalRequest.getId());
-        UpdateCarStateRequest updateCarStateRequest = new UpdateCarStateRequest();
-        updateCarStateRequest.setCarId(returnRentalRequest.getCarId());
-        updateCarStateRequest.setCarStateName(CarStates.Available);
-        this.carService.updateCarState(updateCarStateRequest);
-        this.rentalDao.save(result);
-        return new SuccessResult(BusinessMessages.RentalMessages.RENTAL_NOT_ID);
-    }
+        CarStates states = CarStates.Available;
+        int carId = returnRentalRequest.getCarId();
+        int returnCıtyId = returnRentalRequest.getReturnCityId();
+        updateCarState(carId, returnCıtyId, states);
 
+        return new SuccessResult(BusinessMessages.RentalMessages.RENTAL_RETURNED);
+    }
+    //kiralamayı listeliyor.getall
     @Override
     public DataResult<List<ListRentalDto>> getAll() {
         List<Rental> results = this.rentalDao.findAll();
-        List<ListRentalDto> response = results.stream().map(rental -> modelMapperService.forDto()
-                .map(rental,ListRentalDto.class)).collect(Collectors.toList());
+        List<ListRentalDto> response = results.stream()
+                .map(rental -> modelMapperService.forDto().map(rental, ListRentalDto.class))
+                .collect(Collectors.toList());
         return new SuccessDataResult<List<ListRentalDto>>(response);
     }
 
-
-    private void checkIfRentalExists(int carId) {
+    //aracın durumunu kontrol ediyoruz
+    private void checkIfCarState(int carId) {
         CarDto result = this.carService.getById(carId);
         if (result.getCarStateName() != CarStates.Available) {
             throw new BusinessException(BusinessMessages.RentalMessages.CAR_NOT_AVAILABLE);
         }
 
     }
+    //teslim alınma söz konusu olamaz. böyle bir id yok
+    private void checkIfRentalIdExists(int rentalId) {
+        if (!this.rentalDao.existsById(rentalId)) {
+            throw new BusinessException(BusinessMessages.RentalMessages.RENTAL_NOT_EXIST);
+        }
+    }
+    //car state
+    private void updateCarState(int carId, int cityId, CarStates states) {
+        UpdateCarStateRequest updateCarStateRequest = new UpdateCarStateRequest();
+        updateCarStateRequest.setCarId(carId);
+        updateCarStateRequest.setCarStateName(states);
+        updateCarStateRequest.setCityId(cityId);
+        this.carService.updateCarState(updateCarStateRequest);
+    }
+    //additional servis ekleme fore each döndü.birden çok additional service eklenebilir.
+    private void createOrderedAdditionalService(int rentalId, List<Integer> additionalServicesId) {
+        CreateOrderedAdditionalServiceRequest createOrderedAdditionalServiceRequest = new CreateOrderedAdditionalServiceRequest();
+        for (int additionalServiceId : additionalServicesId) {
+            createOrderedAdditionalServiceRequest.setRentalId(rentalId);
+            createOrderedAdditionalServiceRequest.setAdditionalServiceId(additionalServiceId);
+            this.orderedAdditionalServiceService.add(createOrderedAdditionalServiceRequest);
+        }
+    }
 
 
 }
-

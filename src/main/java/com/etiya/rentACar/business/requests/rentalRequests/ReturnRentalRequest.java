@@ -28,6 +28,8 @@ public class ReturnRentalRequest {
 
     private double dailyPrice;
 
+    private double endKilometer;
+
 
 
 

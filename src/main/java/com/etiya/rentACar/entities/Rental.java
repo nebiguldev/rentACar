@@ -25,6 +25,10 @@ public class Rental {
     @Column(name = "return_date")
     private LocalDate returnDate;
 
+    @Column(name = "end_kilometer")
+    private double endKilometer;
+
+
     @ManyToOne
     @JoinColumn(name = "rent_city_id", referencedColumnName = "id")
     private City rentCityId;
@@ -36,6 +40,7 @@ public class Rental {
     @Column(name = "daily_price")
     private double dailyPrice;
 
+
     @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
@@ -44,7 +49,7 @@ public class Rental {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "rental")//
+    @OneToMany(mappedBy = "rental")
     private List<OrderedAdditionalService> orderedAdditionalServices;
 
 

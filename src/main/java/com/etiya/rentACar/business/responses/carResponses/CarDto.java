@@ -31,5 +31,7 @@ public class CarDto {
 
     private CarStates carStateName;
 
+    private  double kilometerInfo;
+
 
 }

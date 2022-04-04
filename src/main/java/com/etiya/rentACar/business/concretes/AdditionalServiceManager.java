@@ -5,8 +5,6 @@ import com.etiya.rentACar.business.constants.messages.BusinessMessages;
 import com.etiya.rentACar.business.requests.additionalServiceRequests.CreateAdditionalServiceRequest;
 import com.etiya.rentACar.business.requests.additionalServiceRequests.DeleteAdditionalServiceRequest;
 import com.etiya.rentACar.business.requests.additionalServiceRequests.UpdateAdditionalServiceRequest;
-import com.etiya.rentACar.business.requests.customerRequests.DeleteCustomerRequest;
-import com.etiya.rentACar.business.requests.customerRequests.UpdateCustomerRequest;
 import com.etiya.rentACar.business.responses.additionalServiceResponses.ListAdditionalServiceDto;
 import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
 import com.etiya.rentACar.core.utilities.results.DataResult;
@@ -15,7 +13,6 @@ import com.etiya.rentACar.core.utilities.results.SuccessDataResult;
 import com.etiya.rentACar.core.utilities.results.SuccessResult;
 import com.etiya.rentACar.dataAccess.abstracts.AdditionalServiceDao;
 import com.etiya.rentACar.entities.AdditionalService;
-import com.etiya.rentACar.entities.Customer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

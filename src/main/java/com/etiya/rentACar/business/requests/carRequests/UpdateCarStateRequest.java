@@ -12,5 +12,8 @@ public class UpdateCarStateRequest {
     private int carId;
     private int cityId;
     private CarStates carStateName;
+    private  double kilometerInfo;
+
+
 
 }

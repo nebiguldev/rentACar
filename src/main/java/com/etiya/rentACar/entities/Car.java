@@ -30,6 +30,9 @@ public class Car {
     @Column(name = "car_state")
     private CarStates carState;
 
+    @Column(name="kilometer_info")
+    private  double kilometerInfo;
+
     @ManyToOne
     @JoinColumn(name = "color_id")
     private Color color;
