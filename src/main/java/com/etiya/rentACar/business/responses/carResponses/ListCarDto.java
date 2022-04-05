@@ -26,6 +26,12 @@ public class ListCarDto {
 
     private CarStates carStateName;
 
+    private int colorId;
+
+    private  double kilometerInfo;
+
+
+
 
 
 

@@ -23,25 +23,23 @@ import java.util.stream.Collectors;
 
 @Service
 public class CarManager implements CarService {
-    private CarDao carDao;//veritabanındaki işleri yaptırdığımız için ce dao bizim db imiz olduğundan dao yu çağırıyoruz
-    private ModelMapperService modelMapperService;//mapleme yapmak için mapper service i çağırıyoruz
+    private CarDao carDao;
+    private ModelMapperService modelMapperService;
 
-    public CarManager(CarDao carDao, ModelMapperService modelMapperService) {//constructorlarını oluşturduk
+    public CarManager(CarDao carDao, ModelMapperService modelMapperService) {
         this.carDao = carDao;
         this.modelMapperService = modelMapperService;
     }
 
     @Override
-    //ekleme operasyonu
     public Result add(CreateCarRequest createCarRequest) {
         Car car = this.modelMapperService.forRequest().map(createCarRequest, Car.class);
-        this.carDao.save(car);//saveliyor
-        return new SuccessResult(BusinessMessages.Car.CAR_ADD);//araç eklendi diye business mesaj fırlatıyor.
+        this.carDao.save(car);
+        return new SuccessResult(BusinessMessages.Car.CAR_ADD);
 
     }
 
     @Override
-    //güncelleme
     public Result update(UpdateCarRequest updateCarRequest) {
 
         Car result = this.modelMapperService.forRequest().map(updateCarRequest, Car.class);
@@ -49,7 +47,7 @@ public class CarManager implements CarService {
         return new SuccessResult(BusinessMessages.Car.CAR_UPDATE);
     }
 
-//silme operasyonu
+
     @Override
     public Result delete(DeleteCarRequest deleteCarRequest) {
         int carId = deleteCarRequest.getId();
@@ -58,12 +56,15 @@ public class CarManager implements CarService {
     }
 
     @Override
-    //aracın durumunu güncelliyor.
     public Result updateCarState(UpdateCarStateRequest updateCarStateRequest) {
-        Car result = this.carDao.getById(updateCarStateRequest.getCarId());
-        result.setCarState(updateCarStateRequest.getCarStateName());
+        int carId = updateCarStateRequest.getCarId();
+        Car car = this.carDao.getById(carId);
+        UpdateCarRequest response = modelMapperService.forRequest().map(car, UpdateCarRequest.class);
+        response.setId(carId);
+        response.setCarStateName(updateCarStateRequest.getCarStateName());
+        Car result = this.modelMapperService.forRequest().map(response, Car.class);
         this.carDao.save(result);
-        return new SuccessResult(BusinessMessages.Car.CAR_UPDATE);
+        return new SuccessResult(BusinessMessages.Car.CAR_STATE_UPDATED);
     }
 
     @Override
@@ -104,10 +105,10 @@ public class CarManager implements CarService {
                 .collect(Collectors.toList());
 
         return new SuccessDataResult<List<ListCarDto>>(response);
+
     }
 
     @Override
-    //mapleme işlemi
     public DataResult<List<ListCarDto>> getAllByModelYear(double modelYear) {
         List<Car> cars = this.carDao.getByModelYear(modelYear);
         List<ListCarDto> response = cars.stream().map(car -> this.modelMapperService.forDto()

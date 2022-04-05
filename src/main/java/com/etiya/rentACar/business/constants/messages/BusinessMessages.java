@@ -24,10 +24,11 @@ public class BusinessMessages {
         public static final String CITY_UPDATE="Şehir  güncellendi.";
     }
 
-    public static class Car{
+    public static class Car {
         public static final String CAR_ADD="Araç başarıyla eklendi..";
         public static final String CAR_REMOVE="Araç Silindi..";
         public static final String CAR_UPDATE="Araç güncellemesi yapıldı..";
+        public static final String CAR_STATE_UPDATED="Durum güncellemesi";
     }
 
     public static class ColorMessages{

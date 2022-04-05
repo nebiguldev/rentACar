@@ -42,11 +42,11 @@ public class BillManager implements BillService {
         int rentalId = createBillRequest.getRentalId();
         RentalDto rentalDto = this.rentalService.getById(rentalId);
 
-        //iki tarih arasında fatura
+        //iki tarih arasında fatura-->period bir tipleme
         Period day = Period.between(rentalDto.getRentDate(), rentalDto.getReturnDate());
         int daysCount = day.getDays();
 
-
+        //hesaplamada  ihtiyacımız olanlar-->totalprice,totalrentday,returndate
         Bill bill = this.modelMapperService.forRequest().map(createBillRequest, Bill.class);
         bill.setRentDate(rentalDto.getRentDate());
         bill.setReturnDate(rentalDto.getReturnDate());
