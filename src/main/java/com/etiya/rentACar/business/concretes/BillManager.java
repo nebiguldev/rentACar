@@ -16,6 +16,7 @@ import com.etiya.rentACar.core.utilities.results.SuccessDataResult;
 import com.etiya.rentACar.core.utilities.results.SuccessResult;
 import com.etiya.rentACar.dataAccess.abstracts.BillDao;
 import com.etiya.rentACar.entities.Bill;
+import com.etiya.rentACar.entities.OrderedAdditionalService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -43,7 +44,7 @@ public class BillManager implements BillService {
         RentalDto rentalDto = this.rentalService.getById(rentalId);
 
         //iki tarih arasında fatura-->period bir tipleme
-        Period day = Period.between(rentalDto.getRentDate(), rentalDto.getReturnDate());
+       Period day = Period.between(rentalDto.getRentDate(), rentalDto.getReturnDate());
         int daysCount = day.getDays();
 
         //hesaplamada  ihtiyacımız olanlar-->totalprice,totalrentday,returndate
@@ -86,7 +87,8 @@ public class BillManager implements BillService {
     @Override
     public DataResult<List<ListBillDto>> findByCreateDateBetween(LocalDate startDate, LocalDate endDate) {
         List<Bill> bills = this.billDao.findByCreateDateBetween(startDate, endDate);
-        List<ListBillDto> response = bills.stream().map(bill -> modelMapperService.forDto().map(bill, ListBillDto.class)).collect(Collectors.toList());
+        List<ListBillDto> response = bills.stream().map(bill -> modelMapperService.forDto()
+                .map(bill, ListBillDto.class)).collect(Collectors.toList());
 
         return new SuccessDataResult<List<ListBillDto>>(response);
     }
@@ -114,7 +116,7 @@ public class BillManager implements BillService {
         //for'da OrderedAdditionalServiceDto daki listeyi döndük. Ek hizmetlerin gün ile çarpımı.
         for (OrderedAdditionalServiceDto orderedadditionalservice : rentalDto.getOrderedAdditionalServices()) {
 
-            totalPrice += orderedadditionalservice.getAdditionalServiceDailyPrice() * daysCount;
+            totalPrice += orderedadditionalservice.getAdditionalServicePrice() * daysCount;
         }
         return totalPrice;
 

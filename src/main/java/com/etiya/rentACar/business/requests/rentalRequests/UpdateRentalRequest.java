@@ -29,5 +29,7 @@ public class UpdateRentalRequest {
 
     private double dailyPrice;
 
+    private double end_kilometer;
+
 
 }

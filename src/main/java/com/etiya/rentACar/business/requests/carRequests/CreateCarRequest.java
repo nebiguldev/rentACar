@@ -42,7 +42,7 @@ public class CreateCarRequest {
     private  int brandId;
 
     @NotNull
-    private CarStates carStateName;
+    private String carStateName;
 
     private  double kilometerInfo;
 

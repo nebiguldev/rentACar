@@ -30,9 +30,9 @@ public class RentalDto {
 
     private String carDescription;
 
-    private int rentCityName;
+    private String rentCityName;
 
-    private int returnCityName;
+    private String returnCityName;
 
 
 

@@ -52,8 +52,8 @@ public class RentalManager implements RentalService {
         Rental result = this.modelMapperService.forRequest().map(createRentalRequest, Rental.class);
         this.rentalDao.save(result);
 
-        CarStates status = CarStates.Rented;
-        updateCarState(carId, status);
+        CarStates carState = CarStates.Rented;
+        updateCarState(carId, String.valueOf(carState));
 
         int rentalId = result.getId();
         List<Integer> additionalServicesId = createRentalRequest.getAdditionalServiceId();
@@ -90,7 +90,7 @@ public class RentalManager implements RentalService {
         int carId = returnRentalRequest.getCarId();
         int returnCıtyId = returnRentalRequest.getReturnCityId();
         updateCarKilometer(returnRentalRequest);
-        updateCarState(carId, states);
+        updateCarState(carId, String.valueOf(states));
         updateCarCity(carId, returnCıtyId);
 
         return new SuccessResult(BusinessMessages.RentalMessages.RENTAL_RETURNED);
@@ -135,10 +135,10 @@ public class RentalManager implements RentalService {
         }
     }
 
-    private void updateCarState(int carId, CarStates status) {
+    private void updateCarState(int carId, String carState) {
         UpdateCarStateRequest updateCarStateRequest = new UpdateCarStateRequest();
         updateCarStateRequest.setCarId(carId);
-        updateCarStateRequest.setCarStateName(status);
+        updateCarStateRequest.setCarStateName(carState);
         this.carService.updateCarState(updateCarStateRequest);
 
     }
