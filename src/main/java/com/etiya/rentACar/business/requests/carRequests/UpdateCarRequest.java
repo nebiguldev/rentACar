@@ -23,7 +23,7 @@ public class UpdateCarRequest {
 
     private int brandId;
 
-    private String carStateName;
+    private CarStates carStateName;
 
     private  double kilometerInfo;
 

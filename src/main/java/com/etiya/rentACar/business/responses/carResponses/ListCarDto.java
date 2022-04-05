@@ -24,7 +24,7 @@ public class ListCarDto {
 
     private String colorName;
 
-    private String carStateName;
+    private CarStates carStateName;
 
     private int colorId;
 

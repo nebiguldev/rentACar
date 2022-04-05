@@ -53,7 +53,7 @@ public class RentalManager implements RentalService {
         this.rentalDao.save(result);
 
         CarStates carState = CarStates.Rented;
-        updateCarState(carId, String.valueOf(carState));
+        updateCarState(carId, carState);
 
         int rentalId = result.getId();
         List<Integer> additionalServicesId = createRentalRequest.getAdditionalServiceId();
@@ -90,7 +90,7 @@ public class RentalManager implements RentalService {
         int carId = returnRentalRequest.getCarId();
         int returnCıtyId = returnRentalRequest.getReturnCityId();
         updateCarKilometer(returnRentalRequest);
-        updateCarState(carId, String.valueOf(states));
+        updateCarState(carId, states);
         updateCarCity(carId, returnCıtyId);
 
         return new SuccessResult(BusinessMessages.RentalMessages.RENTAL_RETURNED);
@@ -135,7 +135,7 @@ public class RentalManager implements RentalService {
         }
     }
 
-    private void updateCarState(int carId, String carState) {
+    private void updateCarState(int carId, CarStates carState) {
         UpdateCarStateRequest updateCarStateRequest = new UpdateCarStateRequest();
         updateCarStateRequest.setCarId(carId);
         updateCarStateRequest.setCarStateName(carState);

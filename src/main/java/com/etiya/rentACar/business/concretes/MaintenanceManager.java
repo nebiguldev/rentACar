@@ -92,7 +92,7 @@ public class MaintenanceManager implements MaintenanceService {
     private void updateCarState(CreateMaintenanceRequest createMaintenanceRequest) {
         CarDto carDto = this.carService.getById(createMaintenanceRequest.getCarId());
         UpdateCarStateRequest updateCarStateRequest = this.modelMapperService.forRequest().map(carDto, UpdateCarStateRequest.class);
-        updateCarStateRequest.setCarStateName(String.valueOf(CarStates.UnderMaintenance));
+        updateCarStateRequest.setCarStateName(CarStates.UnderMaintenance);
         updateCarStateRequest.setCarId(createMaintenanceRequest.getCarId());
         this.carService.updateCarState(updateCarStateRequest);
 

@@ -10,9 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdateCarStateRequest {
     private int carId;
-    private int cityId;
-    private String carStateName;
-    private  double kilometerInfo;
+    private CarStates carStateName;
+
 
 
 
