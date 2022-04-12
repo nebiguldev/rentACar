@@ -30,7 +30,7 @@ public class CreateCarRequest {
     private String description;
 
     @NotNull
-    @Min(2015)
+    @Min(2000)
     private double modelYear;
 
     private int cityId;

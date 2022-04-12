@@ -5,18 +5,30 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.Size;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "customers")
-public class Customer {
-
+@Table(name = "credit_cards")
+public class CreditCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+
+    @Column(name = "id")
+    private  int id;
+
+    @Column(name = "credit_card_no")
+    @Size(min = 16,max = 16)
+    private String creditCardNo;
+
+    @Column(name = "expire_date")
+    private String expireDate;
+
+    @Column(name = "cvv")
+    @Size(min = 3,max = 3)
+    private String cvv;
 
     @Column(name = "first_name")
     private String firstName;
@@ -24,11 +36,7 @@ public class Customer {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(mappedBy = "customer")
-    private List<Rental> rentals;
 
-    @OneToMany(mappedBy = "customer")
-    private List<Invoice> invoices;
 
 
 

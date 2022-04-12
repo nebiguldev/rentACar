@@ -11,7 +11,9 @@ import java.util.List;
 
 public interface BrandService {
     Result add(CreateBrandRequest createBrandRequest);
+
     Result update(UpdateBrandRequest updateBrandRequest);
+
     Result delete(DeleteBrandRequest deleteBrandRequest);
 
     DataResult<List<ListBrandDto>> getAll();

@@ -56,20 +56,16 @@ public class CarManager implements CarService {
     }
 
     @Override
-    public Result updateCarState(UpdateCarStateRequest updateCarStateRequest) {
-        int carId = updateCarStateRequest.getCarId();
+    public void updateCarState(UpdateCarStateRequest updateCarStateRequest) {
+        int carId = updateCarStateRequest.getId();
         Car car = this.carDao.getById(carId);
-        UpdateCarRequest response = modelMapperService.forRequest().map(car, UpdateCarRequest.class);
-        response.setId(carId);
-        response.setCarStateName(updateCarStateRequest.getCarStateName());
-        Car result = this.modelMapperService.forRequest().map(response, Car.class);
-        this.carDao.save(result);
-        return new SuccessResult(BusinessMessages.Car.CAR_STATE_UPDATED);
+       car.setCarState(updateCarStateRequest.getCarStateName());
+       this.carDao.save(car);
     }
 
     @Override
     public void updateCarKilometer(UpdateKilometerRequest updateKilometerRequest) {
-        int carId = updateKilometerRequest.getId();
+        int carId = updateKilometerRequest.getCarId();
         Car car = this.carDao.getById(carId);
         UpdateCarRequest updateCarRequest = this.modelMapperService.forRequest().map(car,UpdateCarRequest.class);
         updateCarRequest.setKilometerInfo(updateKilometerRequest.getKilometerInfo());
@@ -79,7 +75,7 @@ public class CarManager implements CarService {
 
     @Override
     public void updateCarCity(UpdateCarCityRequest updateCarCityRequest) {
-        int carId = updateCarCityRequest.getId();
+        int carId = updateCarCityRequest.getCarId();
         Car car = this.carDao.getById(carId);
         UpdateCarRequest updateCarRequest = this.modelMapperService.forRequest().map(car,UpdateCarRequest.class);
         updateCarRequest.setCityId(updateCarCityRequest.getCityId());
@@ -140,4 +136,6 @@ public class CarManager implements CarService {
 
         return new SuccessDataResult<List<ListCarDto>>(response);
     }
+
+
 }

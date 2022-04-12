@@ -31,7 +31,7 @@ public class Car {
     private CarStates carState;
 
     @Column(name="kilometer_info")
-    private  double kilometerInfo;
+    private  int kilometerInfo;
 
     @ManyToOne
     @JoinColumn(name = "color_id")

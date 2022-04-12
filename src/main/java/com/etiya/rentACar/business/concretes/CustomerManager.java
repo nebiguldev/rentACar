@@ -5,7 +5,6 @@ import com.etiya.rentACar.business.abstracts.CustomerService;
 import com.etiya.rentACar.business.requests.customerRequests.CreateCustomerRequest;
 import com.etiya.rentACar.business.requests.customerRequests.DeleteCustomerRequest;
 import com.etiya.rentACar.business.requests.customerRequests.UpdateCustomerRequest;
-import com.etiya.rentACar.business.responses.customerResponses.CustomerDto;
 import com.etiya.rentACar.business.responses.customerResponses.ListCustomerDto;
 import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
 import com.etiya.rentACar.core.utilities.results.DataResult;
@@ -20,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class CustomerManager implements CustomerService {
+public class  CustomerManager implements CustomerService {
 
     private CustomerDao customerDao;
     private ModelMapperService modelMapperService;
@@ -60,5 +59,10 @@ public class CustomerManager implements CustomerService {
         List<ListCustomerDto> response= result.stream().map(customer -> modelMapperService.forDto()
                 .map(customer,ListCustomerDto.class)).collect(Collectors.toList());
         return new SuccessDataResult<List<ListCustomerDto>> (response);
+    }
+
+    @Override
+    public DataResult<Object> getById(int customerId) {
+        return null;
     }
 }

@@ -17,4 +17,6 @@ public interface CustomerService {
     Result delete(DeleteCustomerRequest deleteCustomerRequest);
 
     DataResult<List<ListCustomerDto>> getAll();
+
+    DataResult<Object> getById(int customerId);
 }

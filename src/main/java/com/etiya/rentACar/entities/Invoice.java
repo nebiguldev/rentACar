@@ -12,14 +12,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "bills")
-public class Bill {
+public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "bill_number")
-    private String billNumber;
+    @Column(name = "invoice_number")
+    private String invoiceNumber;
 
     @Column(name = "create_date")
     private LocalDate createDate;
@@ -36,12 +36,15 @@ public class Bill {
     @Column(name = "total_price")
     private double totalPrice;
 
-    @ManyToOne
+    @ManyToOne//bir müşterinin birden fazla faturası olabilir.-->karşılığı customerde
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @ManyToOne
+    @ManyToOne//Billmany,one rental-->birden fazla fatura bir kiralamada olabilir-->karşılığı rentalde
     @JoinColumn(name = "rental_id")
     private Rental rental;
 
+    @OneToOne(mappedBy = "invoice")
+    private Payment payment;
 }
+

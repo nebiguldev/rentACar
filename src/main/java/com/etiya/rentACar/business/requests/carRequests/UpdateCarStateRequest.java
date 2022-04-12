@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateCarStateRequest {
-    private int carId;
+    private int id;
     private CarStates carStateName;
+    private int cityId;
 
 
 

@@ -1,5 +1,7 @@
 package com.etiya.rentACar.core.utilities.results;
 
+import com.etiya.rentACar.entities.Invoice;
+
 public class Result {
     private  boolean success;
     private String message;
@@ -20,5 +22,6 @@ public class Result {
     public String getMessage() {
         return message;
     }
+
 
 }

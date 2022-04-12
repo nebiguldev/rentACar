@@ -12,8 +12,7 @@ public class OrderedAdditionalServiceDto {
 
     private int id;
     private int rentalId;
-    private int additionalServiceId;
     private String additionalServiceName;
-    private int additionalServicePrice;
+    private double additionalServicePrice;
 }
 

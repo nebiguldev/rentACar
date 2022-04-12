@@ -5,6 +5,7 @@ import com.etiya.rentACar.business.constants.messages.BusinessMessages;
 import com.etiya.rentACar.business.requests.additionalServiceRequests.CreateAdditionalServiceRequest;
 import com.etiya.rentACar.business.requests.additionalServiceRequests.DeleteAdditionalServiceRequest;
 import com.etiya.rentACar.business.requests.additionalServiceRequests.UpdateAdditionalServiceRequest;
+import com.etiya.rentACar.business.responses.additionalServiceResponses.AdditionalServiceDto;
 import com.etiya.rentACar.business.responses.additionalServiceResponses.ListAdditionalServiceDto;
 import com.etiya.rentACar.core.utilities.mapping.ModelMapperService;
 import com.etiya.rentACar.core.utilities.results.DataResult;
@@ -59,7 +60,12 @@ public class AdditionalServiceManager implements AdditionalServiceService {
         return new SuccessDataResult<List<ListAdditionalServiceDto>>(response);
     }
 
-
+    @Override
+    public DataResult<AdditionalServiceDto> getById(int id) {
+       AdditionalService result =this.additionalServiceDao.getById(id);
+       AdditionalServiceDto additionalServiceDto =this.modelMapperService.forDto().map(result,AdditionalServiceDto.class);
+       return new SuccessDataResult<AdditionalServiceDto>(additionalServiceDto);
+    }
 
 
 }

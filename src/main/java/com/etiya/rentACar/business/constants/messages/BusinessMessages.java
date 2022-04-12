@@ -53,6 +53,16 @@ public class BusinessMessages {
         public static final String BILL_DELETED="Fatura başarıyla silindi";
         public static final String BILL_UPDATED="Fatura başarıyla güncellendi.";
     }
+    public static class PaymentMessages{
+        public static final String PAYMENT_ADD = "Ödeme başarıyla eklendi";
+        public static final String PAYMENT_UPDATE = "Ödeme başarıyla güncellendi";
+        public static final String PAYMENT_DELETE = "Ödeme başarıyla silindi.";
+        public static final String PAYMENT_LIST = "Ödemeler listelendi.";
+
+    }
+
+
+
 
 
 

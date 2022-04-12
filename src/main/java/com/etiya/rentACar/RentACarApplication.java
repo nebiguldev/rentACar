@@ -1,6 +1,8 @@
 package com.etiya.rentACar;
 
+import com.etiya.rentACar.core.adapters.bank.concrates.HalkBankPosServiceAdapter;
 import com.etiya.rentACar.core.crossCuttingConcerns.exceptionHandling.BusinessException;
+import com.etiya.rentACar.core.externalServices.HalkBankPosService;
 import com.etiya.rentACar.core.utilities.results.ErrorDataResult;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
@@ -26,10 +28,16 @@ public class RentACarApplication {
     }
 
     @Bean
-
     public ModelMapper getModelMapper() {
         return new ModelMapper();
     }
+
+    @Bean
+   public HalkBankPosService getHalkBankPosService(){
+        return new HalkBankPosService();
+    }
+
+
 
     @ExceptionHandler
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)

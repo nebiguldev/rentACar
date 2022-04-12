@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateKilometerRequest {
-    private  int id;
+    private  int carId;
     private double kilometerInfo;
 }
